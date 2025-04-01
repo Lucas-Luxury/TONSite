@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e2e;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #2a2a3a;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        .copyable {
+            font-size: 18px;
+            line-height: 1.6;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: relative;
+            display: inline-block;
+            background-color: #3b3b4f;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .copyable:hover {
+            background-color: #4b4b5f;
+        }
+        .copyable::after {
+            content: " (нажмите, чтобы скопировать)";
+            font-size: 14px;
+            color: #bbb;
+        }
+        .telegram {
+            margin-top: 20px;
+        }
+        .telegram a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0088cc;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .telegram a:hover {
+            background-color: #005f8a;
+        }
+    </style>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Скопировано");
+            }).catch(err => {
+                console.error("Ошибка копирования", err);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>My TON Wallets</h1>
+        <p class="copyable" onclick="copyToClipboard('UQAJcm9_x3USNzOBJDpnc5rsnSMdpeJfaCLyZHkouwOwSqni')">UQAJcm9_x3USNzOBJDpnc5rsnSMdpeJfaCLyZHkouwOwSqni</p>
+        <p class="copyable" onclick="copyToClipboard('agent-v-tone.ton')">agent-v-tone.ton</p>
+    </div>
+    <div class="container">
+        <h1>Биография</h1>
+        <p>Я увлекаюсь Программированием достаточно давно. Достаточно хорошо знаю Python</p>
+        <p>Интересуюсь разработкой iOS-приложений и умею делать ботов в Telegram</p>
+        <div class="telegram">
+            <a href="https://t.me/TheAnotherOneUsername" target="_blank">Telegram</a>
+        </div>
+    </div>
+</body>
+</html>
