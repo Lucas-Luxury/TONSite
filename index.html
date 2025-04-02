@@ -28,21 +28,23 @@
             font-size: 18px;
             line-height: 1.6;
             cursor: pointer;
-            transition: color 0.3s;
-            position: relative;
-            display: inline-block;
+            transition: background-color 0.3s;
             background-color: #3b3b4f;
             color: #fff;
-            padding: 5px 10px;
+            padding: 10px;
             border-radius: 5px;
+            word-break: break-all;
+            display: block;
+            margin: 10px auto;
+            max-width: 90%;
         }
         .copyable:hover {
             background-color: #4b4b5f;
         }
-        .copyable::after {
-            content: " (нажмите, чтобы скопировать)";
+        .copy-hint {
             font-size: 14px;
             color: #bbb;
+            margin-top: 5px;
         }
         .telegram {
             margin-top: 20px;
@@ -60,6 +62,10 @@
         .telegram a:hover {
             background-color: #005f8a;
         }
+        #countdown {
+            font-size: 2em;
+            margin-top: 20px;
+        }
     </style>
     <script>
         function copyToClipboard(text) {
@@ -69,13 +75,39 @@
                 console.error("Ошибка копирования", err);
             });
         }
+        function updateCountdown() {
+            const targetDate = new Date('2025-04-28T00:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerText = 'Время вышло!';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerText = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        window.onload = updateCountdown;
     </script>
 </head>
 <body>
     <div class="container">
         <h1>My TON Wallets</h1>
-        <p class="copyable" onclick="copyToClipboard('UQAJcm9_x3USNzOBJDpnc5rsnSMdpeJfaCLyZHkouwOwSqni')">UQAJcm9_x3USNzOBJDpnc5rsnSMdpeJfaCLyZHkouwOwSqni</p>
-        <p class="copyable" onclick="copyToClipboard('agent-v-tone.ton')">agent-v-tone.ton</p>
+        <div class="copyable" onclick="copyToClipboard('UQAJcm9_x3USNzOBJDpnc5rsnSMdpeJfaCLyZHkouwOwSqni')">
+            UQAJcm9_x3USNzOBJDpnc5rsnSMdpeJfaCLyZHkouwOwSqni
+        </div>
+        <div class="copy-hint">(нажмите, чтобы скопировать)</div>
+        <div class="copyable" onclick="copyToClipboard('agent-v-tone.ton')">
+            agent-v-tone.ton
+        </div>
+        <div class="copy-hint">(нажмите, чтобы скопировать)</div>
     </div>
     <div class="container">
         <h1>Биография</h1>
@@ -84,6 +116,10 @@
         <div class="telegram">
             <a href="https://t.me/TheAnotherOneUsername" target="_blank">Telegram</a>
         </div>
+    </div>
+    <div class="container">
+        <h1>Обратный отсчёт до 28 апреля</h1>
+        <div id="countdown"></div>
     </div>
 </body>
 </html>
